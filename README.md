@@ -20,11 +20,25 @@ schnell, übersichtlich und stressfrei.
 
 ## 2️⃣ Installation
 
-### Variante A – Setup (empfohlen)
-In Bearbeitung. 🚧
+### Variante A – Setup
+1. Lade die aktuelle **Setup-Version** von der [Releases-Seite](https://github.com/DoubleGx0/FixIT/releases) herunter.  
+2. Führe die `.exe` aus und folge dem Installationsassistenten.  
+3. Während der Installation kannst du auswählen:  
+   - **Für alle Benutzer dieses Computers (alle Benutzer):** FixIT wird für alle Windows-Konten installiert.  
+   - **Nur für mich (aktueller Benutzer):** FixIT wird nur im eigenen Benutzerprofil installiert.  
+4. Nach Abschluss findest du FixIT im Startmenü und kannst es wie ein normales Programm starten.
+<img width="499" height="388" alt="image" src="https://github.com/user-attachments/assets/7e7548f5-ea30-4763-8cef-92c89c4a0cef" />
+
 
 ### Variante B – Portable
-In Bearbeitung. 🚧
+1. Lade die aktuelle **Portable-Version** von der [Releases-Seite](https://github.com/DoubleGx0/FixIT/releases) herunter.  
+2. Entpacke das ZIP-Archiv an einen beliebigen Ort (z. B. USB-Stick oder Tools-Ordner).  
+3. Starte FixIT direkt über die `FixIT.exe`.  
+4. Keine Installation nötig – alle Daten bleiben im gleichen Ordner.  
+<img width="975" height="397" alt="image" src="https://github.com/user-attachments/assets/15ed88e0-cf44-4178-92d8-a268f93bf276" />
+
+
+
 
 ---
 
@@ -60,6 +74,7 @@ Jeder Beitrag – egal wie klein – hilft, die Weiterentwicklung und Pflege die
 ---
 
 > © 2025 – Entwickelt von **DoubleGx0**
+
 
 
 
