@@ -1,12 +1,15 @@
 name: Mirror Releases from Private
+
 on:
-  workflow_dispatch: {}    # manuell starten
+  workflow_dispatch: {}          # weiterhin manuell startbar
+  schedule:
+    - cron: "0 */6 * * *"        # AUTOMATISCH: alle 6 Stunden (UTC)
 
 jobs:
   mirror:
     runs-on: ubuntu-latest
     permissions:
-      contents: write
+      contents: write            # Tags/Releases im Public-Repo schreiben
     steps:
       - name: Checkout public repo
         uses: actions/checkout@v4
@@ -18,9 +21,9 @@ jobs:
 
       - name: Mirror releases
         env:
-          GH_TOKEN: ${{ secrets.GH_TOKEN }}
-          SRC_REPO: ${{ secrets.SRC_REPO }}        # z.B. DoubleGx0/FixIT (privat)
-          DST_REPO: ${{ github.repository }}       # z.B. DoubleGx0/FixIT-public
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}   # PAT mit repo-Scopes (im Public-Repo als Secret)
+          SRC_REPO: ${{ secrets.SRC_REPO }}   # z.B. DoubleGx0/FixIT (privates Repo)
+          DST_REPO: ${{ github.repository }}  # z.B. DoubleGx0/FixIT-public
         run: |
           set -euo pipefail
 
@@ -40,10 +43,12 @@ jobs:
 
             echo "==> ${tag}"
 
+            # Tag im Public-Repo sicherstellen
             if ! gh api "/repos/${DST_REPO}/git/ref/tags/${tag}" >/dev/null 2>&1; then
               gh api --method POST "/repos/${DST_REPO}/git/refs" -f ref="refs/tags/${tag}" -f sha="$sha" >/dev/null
             fi
 
+            # Release im Public-Repo erstellen (falls fehlt)
             if ! gh release view "$tag" -R "${DST_REPO}" >/dev/null 2>&1; then
               gh release create "$tag" \
                 -R "${DST_REPO}" \
@@ -54,6 +59,7 @@ jobs:
                 >/dev/null
             fi
 
+            # Assets kopieren
             echo "$row" | base64 -d | jq -c '.assets[]?' | while read -r asset; do
               asset_name=$(echo "$asset" | jq -r '.name')
               asset_id=$(echo "$asset" | jq -r '.id')
@@ -61,7 +67,9 @@ jobs:
               echo "   -> $asset_name"
               tmpfile=$(mktemp)
 
+              # Privat-Asset laden
               gh api -H "Accept: application/octet-stream" "/repos/${SRC_REPO}/releases/assets/${asset_id}" > "$tmpfile"
+              # Ins Public-Release hochladen (überschreiben erlaubt)
               gh release upload "$tag" "$tmpfile#$asset_name" -R "${DST_REPO}" --clobber >/dev/null
               rm -f "$tmpfile"
             done
