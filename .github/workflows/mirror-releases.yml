@@ -2,8 +2,6 @@ name: Mirror Releases from Private
 
 on:
   workflow_dispatch: {}          # weiterhin manuell startbar
-  schedule:
-    - cron: "0 */6 * * *"        # AUTOMATISCH: alle 6 Stunden (UTC)
 
 jobs:
   mirror:
