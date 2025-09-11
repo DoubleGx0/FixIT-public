@@ -37,7 +37,7 @@ schnell, übersichtlich und stressfrei.
 4. Keine Installation nötig – alle Daten bleiben im gleichen Ordner.  
 <img width="975" height="397" alt="image" src="https://github.com/user-attachments/assets/15ed88e0-cf44-4178-92d8-a268f93bf276" />
 
-
+- [HelpIT Website](https://helpinformatik.de)
 
 
 ---
@@ -74,6 +74,7 @@ Jeder Beitrag – egal wie klein – hilft, die Weiterentwicklung und Pflege die
 ---
 
 > © 2025 – Entwickelt von **DoubleGx0**
+
 
 
 
